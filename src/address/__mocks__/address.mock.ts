@@ -1,8 +1,8 @@
 import { cityEntitieMock } from '../../city/__mocks__/cityEntitie.mock';
-import { AdressEntity } from '../entities/adress.entity';
+import { AddressEntity } from '../entities/address.entity';
 import { userEntityMock } from '../../user/__mocks__/user.mock';
 
-export const adressMock: AdressEntity = {
+export const addressMock: AddressEntity = {
   cep: '32900000',
   cityId: cityEntitieMock.id,
   complement: 'casa',

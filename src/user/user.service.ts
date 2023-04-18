@@ -42,7 +42,7 @@ export class UserService {
         id: userId,
       },
       relations: {
-        adresses: {
+        addresses: {
           city: {
             state: true,
           },

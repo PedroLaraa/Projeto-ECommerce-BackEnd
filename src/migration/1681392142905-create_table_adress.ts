@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateTableAdress1681392142905 implements MigrationInterface {
+export class CreateTableAddress1681392142905 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     queryRunner.query(`
-    CREATE TABLE public.address (
+    CREATE TABLE public.addresss (
       id integer NOT NULL,
       user_id integer NOT NULL,
       complement character varying,
@@ -17,7 +17,7 @@ export class CreateTableAdress1681392142905 implements MigrationInterface {
       foreign key (city_id) references public.city(id)
   );
   
-  CREATE SEQUENCE public.address_id_seq
+  CREATE SEQUENCE public.addresss_id_seq
       AS integer
       START WITH 1
       INCREMENT BY 1
@@ -25,15 +25,15 @@ export class CreateTableAdress1681392142905 implements MigrationInterface {
       NO MAXVALUE
       CACHE 1;
       
-    ALTER SEQUENCE public.address_id_seq OWNED BY public.address.id;
+    ALTER SEQUENCE public.addresss_id_seq OWNED BY public.addresss.id;
     
-    ALTER TABLE ONLY public.address ALTER COLUMN id SET DEFAULT nextval('public.address_id_seq'::regclass);
+    ALTER TABLE ONLY public.addresss ALTER COLUMN id SET DEFAULT nextval('public.addresss_id_seq'::regclass);
     `);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     queryRunner.query(`
-      drop table public.adress
+      drop table public.address
     `);
   }
 }

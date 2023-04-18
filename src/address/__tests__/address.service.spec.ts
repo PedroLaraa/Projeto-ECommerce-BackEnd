@@ -1,27 +1,27 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdressService } from '../adress.service';
+import { AddressService } from '../address.service';
 import { Repository } from 'typeorm';
-import { AdressEntity } from '../../adress/entities/adress.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { adressMock } from '../__mocks__/adress.mock';
+import { addressMock } from '../__mocks__/address.mock';
 import { UserService } from '../../user/user.service';
 import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { CityService } from '../../city/city.service';
 import { cityEntitieMock } from '../../city/__mocks__/cityEntitie.mock';
-import { createAdressMock } from '../__mocks__/createAddress.mock';
+import { createAddressMock } from '../__mocks__/createAddresss.mock';
 
-describe('AdressService', () => {
-  let service: AdressService;
+describe('AddressService', () => {
+  let service: AddressService;
 
   let userService: UserService;
   let cityService: CityService;
 
-  let adressRepository: Repository<AdressEntity>;
+  let addressRepository: Repository<AddressEntity>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        AdressService,
+        AddressService,
         {
           provide: CityService,
           useValue: {
@@ -35,50 +35,50 @@ describe('AdressService', () => {
           },
         },
         {
-          provide: getRepositoryToken(AdressEntity),
+          provide: getRepositoryToken(AddressEntity),
           useValue: {
-            save: jest.fn().mockResolvedValue(adressMock),
+            save: jest.fn().mockResolvedValue(addressMock),
           },
         },
       ],
     }).compile();
 
-    service = module.get<AdressService>(AdressService);
+    service = module.get<AddressService>(AddressService);
     userService = module.get<UserService>(UserService);
     cityService = module.get<CityService>(CityService);
 
-    adressRepository = module.get<Repository<AdressEntity>>(
-      getRepositoryToken(AdressEntity),
+    addressRepository = module.get<Repository<AddressEntity>>(
+      getRepositoryToken(AddressEntity),
     );
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-    expect(adressRepository).toBeDefined();
+    expect(addressRepository).toBeDefined();
   });
 
-  it('should return adress after save', async () => {
-    const address = await service.createAdress(
-      createAdressMock,
+  it('should return address after save', async () => {
+    const addresss = await service.createAddress(
+      createAddressMock,
       userEntityMock.id,
     );
 
-    expect(address).toEqual(adressMock);
+    expect(addresss).toEqual(addressMock);
   });
 
-  it('should return error if exception in address after save in userService', async () => {
+  it('should return error if exception in addresss after save in userService', async () => {
     jest.spyOn(userService, 'findUserById').mockRejectedValueOnce(new Error());
 
     expect(
-      service.createAdress(createAdressMock, userEntityMock.id),
+      service.createAddress(createAddressMock, userEntityMock.id),
     ).rejects.toThrowError();
   });
 
-  it('should return error if exception in address after save in userService', async () => {
+  it('should return error if exception in addresss after save in userService', async () => {
     jest.spyOn(cityService, 'findCityById').mockRejectedValueOnce(new Error());
 
     expect(
-      service.createAdress(createAdressMock, userEntityMock.id),
+      service.createAddress(createAddressMock, userEntityMock.id),
     ).rejects.toThrowError();
   });
 });
