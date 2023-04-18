@@ -8,7 +8,7 @@ import { UserService } from '../../user/user.service';
 import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { CityService } from '../../city/city.service';
 import { cityEntitieMock } from '../../city/__mocks__/cityEntitie.mock';
-import { createAddressMock } from '../__mocks__/createAddresss.mock';
+import { createAddressMock } from '../__mocks__/createAddress.mock';
 
 describe('AddressService', () => {
   let service: AddressService;
