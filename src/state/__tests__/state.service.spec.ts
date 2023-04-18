@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { StateEntity } from '../../state/entities/state.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { stateEntityMock } from '../../state/__mocks__/state.mock';
-import { userEntityMock } from 'src/user/__mocks__/user.mock';
 
 describe('StateService', () => {
   let service: StateService;
