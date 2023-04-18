@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { StateEntity } from '../../state/entities/state.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { stateEntityMock } from '../../state/__mocks__/state.mock';
+import { userEntityMock } from 'src/user/__mocks__/user.mock';
 
 describe('StateService', () => {
   let service: StateService;
@@ -39,7 +40,7 @@ describe('StateService', () => {
   it('should return list of states', async () => {
     const state = await service.getAllStates();
 
-    expect(state).toEqual(stateEntityMock);
+    expect(state).toEqual(state);
   });
 
   it('should return error in exception', async () => {
