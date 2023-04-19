@@ -10,8 +10,6 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { JwtModule } from '@nestjs/jwt';
-import { CategoryService } from './category/category.service';
-import { CategoryController } from './category/category.controller';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { CategoryModule } from './category/category.module';
@@ -42,13 +40,12 @@ import { CategoryModule } from './category/category.module';
     JwtModule,
     CategoryModule,
   ],
-  controllers: [CategoryController, ProductController],
+  controllers: [ProductController],
   providers: [
     {
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
-    CategoryService,
     ProductService,
   ],
 })

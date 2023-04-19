@@ -34,4 +34,22 @@ describe('CategoryService', () => {
     expect(service).toBeDefined();
     expect(categoryRepository).toBeDefined();
   });
+
+  it('should return list category', async () => {
+    const categories = await service.findAllCategories();
+
+    expect(categories).toEqual([categoryMock]);
+  });
+
+  it('should return error in list category empty', async () => {
+    jest.spyOn(categoryRepository, 'find').mockRejectedValue([]);
+
+    expect(await service.findAllCategories()).rejects.toThrowError();
+  });
+
+  it('should return error in list category exception', async () => {
+    jest.spyOn(categoryRepository, 'find').mockRejectedValue(new Error());
+
+    expect(await service.findAllCategories()).rejects.toThrowError();
+  });
 });
