@@ -14,6 +14,7 @@ import { CategoryService } from './category/category.service';
 import { CategoryController } from './category/category.controller';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ProductService } from './product/product.service';
     CacheModule,
     AuthModule,
     JwtModule,
+    CategoryModule,
   ],
   controllers: [CategoryController, ProductController],
   providers: [
