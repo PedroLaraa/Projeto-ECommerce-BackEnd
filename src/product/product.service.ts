@@ -46,15 +46,13 @@ export class ProductService {
   }
 
   async createProduct(createProduct: CreateProduct) {
-    const categoryExists = await this.categoryService.findCategoryById(
-      createProduct.categoryId,
-    );
-
-    // if (!categoryExists) {
-    //   throw new BadRequestException(
-    //     `Category ${createProduct.categoryId} not found`,
-    //   );
-    // }
+    await this.categoryService
+      .findCategoryById(createProduct.categoryId)
+      .catch(() => {
+        throw new NotFoundException(
+          `Category ID ${createProduct.categoryId} not exists`,
+        );
+      });
 
     const productExists = await this.findProductByName(
       createProduct.name,
