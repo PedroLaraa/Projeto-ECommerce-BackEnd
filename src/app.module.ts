@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     JwtModule,
     CategoryModule,
+    ProductModule,
   ],
   controllers: [ProductController],
   providers: [
