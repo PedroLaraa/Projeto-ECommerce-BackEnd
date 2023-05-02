@@ -46,11 +46,7 @@ export class ProductService {
   async createProduct(createProduct: CreateProduct) {
     const productExists = await this.findProductByName(
       createProduct.name,
-    ).catch(() => {
-      throw new BadRequestException(
-        `Category ID ${createProduct.categoryId} not found`,
-      );
-    });
+    ).catch(() => undefined);
 
     if (productExists) {
       throw new BadRequestException(`${createProduct.name} already exists`);
