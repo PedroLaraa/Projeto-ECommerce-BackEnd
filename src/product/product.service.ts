@@ -7,14 +7,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { Repository } from 'typeorm';
 import { CreateProduct } from './dtos/create-product.dto';
-import { CategoryService } from 'src/category/category.service';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,
-    private readonly categoryService: CategoryService,
   ) {}
 
   async findAllProducts(): Promise<ProductEntity[]> {
@@ -46,17 +44,13 @@ export class ProductService {
   }
 
   async createProduct(createProduct: CreateProduct) {
-    await this.categoryService
-      .findCategoryById(createProduct.categoryId)
-      .catch(() => {
-        throw new NotFoundException(
-          `Category ID ${createProduct.categoryId} not exists`,
-        );
-      });
-
     const productExists = await this.findProductByName(
       createProduct.name,
-    ).catch(() => undefined);
+    ).catch(() => {
+      throw new BadRequestException(
+        `Category ID ${createProduct.categoryId} not found`,
+      );
+    });
 
     if (productExists) {
       throw new BadRequestException(`${createProduct.name} already exists`);
