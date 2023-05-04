@@ -49,7 +49,7 @@ describe('CategoryService', () => {
     expect(service.findAllProducts).rejects.toThrowError();
   });
 
-  it('should return product after save', async () => {
+  it('should returnrproduct after save', async () => {
     jest.spyOn(productRepository, 'findOne').mockResolvedValue(undefined);
 
     const products = await service.createProduct(createProduct);
