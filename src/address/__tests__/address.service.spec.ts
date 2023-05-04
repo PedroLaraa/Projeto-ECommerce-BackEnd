@@ -59,15 +59,15 @@ describe('AddressService', () => {
   });
 
   it('should return address after save', async () => {
-    const addresss = await service.createAddress(
+    const address = await service.createAddress(
       createAddressMock,
       userEntityMock.id,
     );
 
-    expect(addresss).toEqual(addressMock);
+    expect(address).toEqual(addressMock);
   });
 
-  it('should return error if exception in addresss after save in userService', async () => {
+  it('should return error if exception in address after save in userService', async () => {
     jest.spyOn(userService, 'findUserById').mockRejectedValueOnce(new Error());
 
     expect(
@@ -76,9 +76,9 @@ describe('AddressService', () => {
   });
 
   it('should return all addresses to user', async () => {
-    const addresss = await service.findAddressByUserId(userEntityMock.id);
+    const address = await service.findAddressByUserId(userEntityMock.id);
 
-    expect(addresss).toEqual([addressMock]);
+    expect(address).toEqual([addressMock]);
   });
 
   it('should return not found if not find address resgistred', async () => {
