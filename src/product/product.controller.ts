@@ -24,6 +24,14 @@ export class ProductController {
     );
   }
 
+  @Roles(UserType.User, UserType.Admin)
+  @Get('/search')
+  async getProductByName(
+    @Body() product: CreateProduct,
+  ): Promise<ReturnProduct[]> {
+    return this.productService.findAllProductByName(product.name);
+  }
+
   @Roles(UserType.Admin)
   @UsePipes(ValidationPipe)
   @Post()

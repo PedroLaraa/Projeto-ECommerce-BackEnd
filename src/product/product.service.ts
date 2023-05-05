@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateProduct } from './dtos/create-product.dto';
 
 @Injectable()
@@ -34,6 +34,18 @@ export class ProductService {
       where: {
         name: productName,
       },
+    });
+
+    if (!product) {
+      throw new NotFoundException(`Product ${productName} not found`);
+    }
+
+    return product;
+  }
+
+  async findAllProductByName(productName: string): Promise<ProductEntity[]> {
+    const product: ProductEntity[] = await this.productRepository.findBy({
+      name: Like(`%${productName}%`),
     });
 
     if (!product) {

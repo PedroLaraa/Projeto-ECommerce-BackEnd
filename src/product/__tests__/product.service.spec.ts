@@ -21,6 +21,7 @@ describe('CategoryService', () => {
             findOne: jest.fn().mockResolvedValue(productMock),
             find: jest.fn().mockResolvedValue([productMock]),
             save: jest.fn().mockResolvedValue(productMock),
+            findBy: jest.fn().mockResolvedValue([productMock]),
           },
         },
       ],
@@ -39,6 +40,14 @@ describe('CategoryService', () => {
 
   it('should return list products', async () => {
     const products = await service.findAllProducts();
+
+    expect(products).toEqual([productMock]);
+  });
+
+  it('should return list products searched', async () => {
+    const products: ProductEntity[] = await service.findAllProductByName(
+      productMock.name,
+    );
 
     expect(products).toEqual([productMock]);
   });
