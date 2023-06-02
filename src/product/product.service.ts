@@ -55,7 +55,7 @@ export class ProductService {
     return product;
   }
 
-  async createProduct(createProduct: CreateProduct) {
+  async createProduct(createProduct: CreateProduct): Promise<ProductEntity> {
     const productExists = await this.findProductByName(
       createProduct.name,
     ).catch(() => undefined);
